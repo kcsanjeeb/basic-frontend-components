@@ -1,0 +1,44 @@
+body{
+  font-size: 12px;
+  background-color: #999;
+  padding:0;
+  margin:0;
+  font-family: sans-serif;
+}
+section {
+  padding:20px 50px;
+}
+header h1{
+  margin:0;
+    font-size:30px;
+    color: #333333;
+    background-color: #eeeeee;
+    padding: 40px 20px;
+  text-transform:uppercase;
+  border-bottom:1px #fff solid;
+}
+input[type="file"] {
+  display: block;
+}
+.imageThumb {
+  max-height: 75px;
+  border: 2px solid;
+  padding: 1px;
+  cursor: pointer;
+}
+.pip {
+  display: inline-block;
+  margin: 10px 10px 0 0;
+}
+.remove {
+  display: block;
+  background: #444;
+  border: 1px solid black;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+}
+.remove:hover {
+  background: white;
+  color: black;
+}
