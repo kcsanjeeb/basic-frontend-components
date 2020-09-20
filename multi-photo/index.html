@@ -2,24 +2,103 @@
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>CodePen - MULTI FILE UPLOAD</title>
+  <title>final - MULTI FILE UPLOAD</title>
   <link rel="stylesheet" href="./style.css">
-
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
+<style>
+.container {
+  position: relative;
+  width: 200px;
+}
+
+.imageThumb {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: 180px;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.container:hover .image {
+  opacity: 0.3;
+}
+
+.container:hover .middle {
+  opacity: 1;
+}
+
+.text {
+  background-color: #4CAF50;
+  color: white;
+  font-size: 16px;
+  padding: 2px 2px;
+}
+
+</style>
 <body>
 <!-- partial:index.partial.html -->
 <header>
         <h1>Multiple Photo uploader</h1>
     </header>
 <section>
-<div class="field" align="left">
-  <h3>Choose your images</h3>
+
+<div class="photoUpload row">
+  <input class="upload" type="file" id="files" name="files[]" multiple />
+
   
-  <input type="file" id="files" name="files[]" multiple />
-</div>
+  </div>
   <section>
 <!-- partial -->
-  <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script><script  src="./script.js"></script>
-
+  <script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<script>
+  
+  $(document).ready(function() {
+  if (window.File && window.FileList && window.FileReader) {
+    $("#files").on("change", function(e) {
+      var files = e.target.files,
+        filesLength = files.length;
+      for (var i = 0; i < filesLength; i++) {
+        var f = files[i]
+        var fileReader = new FileReader();
+        fileReader.onload = (function(e) {
+          var file = e.target;
+          $("<div class=\"container  pip \">"+
+            "<img class=\"imageThumb img-thumbnail\" src=\""  + e.target.result + "\" title=\"" + file.name + "\"/>"+
+              "<span class=\"middle remove\">"+
+            "<button type=\"button\" class=\"btn btn-danger\">Delete</button>"+
+              "</span>"+
+            "</div>").insertAfter("#files");
+          $(".remove").click(function(){
+            $(this).parent(".pip").remove();
+          });
+          
+   
+        });
+        fileReader.readAsDataURL(f);
+      }
+    });
+  } else {
+    alert("Your browser doesn't support to File API")
+  }
+});
+  </script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 </body>
+
 </html>
+
